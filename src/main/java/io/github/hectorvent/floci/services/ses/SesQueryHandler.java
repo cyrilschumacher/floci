@@ -62,7 +62,8 @@ public class SesQueryHandler {
     private Response handleVerifyEmailIdentity(MultivaluedMap<String, String> params, String region) {
         String emailAddress = getParam(params, "EmailAddress");
         sesService.verifyEmailIdentity(emailAddress, region);
-        return Response.ok(AwsQueryResponse.envelopeNoResult("VerifyEmailIdentity", AwsNamespaces.SES)).build();
+        // Keep an empty <VerifyEmailAddressResult/> element for AWS CLI / botocore compatibility.
+        return Response.ok(AwsQueryResponse.envelope("VerifyEmailIdentity", AwsNamespaces.SES, "")).build();
     }
 
     private Response handleVerifyEmailAddress(MultivaluedMap<String, String> params, String region) {
