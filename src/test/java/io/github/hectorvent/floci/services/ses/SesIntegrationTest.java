@@ -28,7 +28,9 @@ class SesIntegrationTest {
             .post("/")
         .then()
             .statusCode(200)
-            .body(containsString("VerifyEmailIdentityResponse"));
+            .body(containsString("<VerifyEmailIdentityResponse xmlns=\"http://ses.amazonaws.com/doc/2010-12-01/\">"))
+            .body(containsString("<VerifyEmailIdentityResult></VerifyEmailIdentityResult>"))
+            .body(containsString("<ResponseMetadata><RequestId>"));
     }
 
     @Test
